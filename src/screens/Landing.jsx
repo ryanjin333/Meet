@@ -1,10 +1,5 @@
-import {
-  View,
-  Text,
-  Pressable,
-  Dimensions,
-  ImageBackground,
-} from "react-native";
+import { useEffect } from "react";
+import { View, Text, Dimensions, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EStyleSheet from "react-native-extended-stylesheet";
 import {
@@ -18,9 +13,22 @@ import Animated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 
-import { NavigationButton } from "../components";
+import { BlurButton } from "../components";
+import { useSelector } from "react-redux";
 
-const Landing = () => {
+const Landing = ({ navigation }) => {
+  const user = useSelector((state) => state.user.user);
+  useEffect(() => {
+    if (user) {
+      navigation.navigate("Feed");
+      console.log(user);
+    }
+  }, [user]);
+
+  const continueButtonTapped = () => {
+    navigation.navigate("Register");
+  };
+
   // fonts
   let [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -42,7 +50,7 @@ const Landing = () => {
           <Text style={styles.title}>Welcome</Text>
           <Text style={styles.subtitle}>Plan meetups with friends! 😉</Text>
         </View>
-        <NavigationButton />
+        <BlurButton onPress={continueButtonTapped} title="Continue" />
       </SafeAreaView>
     </ImageBackground>
   );
@@ -51,7 +59,7 @@ const Landing = () => {
 export default Landing;
 
 const entireScreenWidth = Dimensions.get("window").width;
-EStyleSheet.build({ $rem: entireScreenWidth / 480 });
+EStyleSheet.build({ $rem: entireScreenWidth / 430 });
 
 const styles = EStyleSheet.create({
   backgroundImage: {

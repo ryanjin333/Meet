@@ -12,13 +12,12 @@ import * as Haptics from "expo-haptics";
 import { Text, Dimensions, Pressable } from "react-native";
 import React from "react";
 
-const NavigationButton = () => {
+const BlurButton = ({ onPress, title }) => {
   const btnTapped = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    onPress();
   };
 
-  // navigation
-  const navigation = useNavigation();
   // fonts
   let [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -32,20 +31,19 @@ const NavigationButton = () => {
   return (
     <Pressable style={styles.btn} onPress={btnTapped}>
       <BlurView intensity={30} style={styles.btnBlur}>
-        <Text style={styles.btnText}>Continue</Text>
+        <Text style={styles.btnText}>{title}</Text>
       </BlurView>
     </Pressable>
   );
 };
 
-export default NavigationButton;
+export default BlurButton;
 
 const entireScreenWidth = Dimensions.get("window").width;
-EStyleSheet.build({ $rem: entireScreenWidth / 480 });
+EStyleSheet.build({ $rem: entireScreenWidth / 430 });
 
 const styles = EStyleSheet.create({
   btn: {
-    marginTop: 430,
     height: 65,
     width: "100%",
     borderRadius: 20,
