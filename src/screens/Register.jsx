@@ -33,6 +33,7 @@ const initialState = {
 
 const Register = ({ navigation }) => {
   const [values, setValues] = useState(initialState);
+  const user = useSelector((state) => state.user.user);
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -57,13 +58,17 @@ const Register = ({ navigation }) => {
       } else {
         // register user
         dispatch(registerUser(currentUser));
-        navigation.navigate("Feed");
       }
-      navigation.navigate("Feed");
     } catch (error) {
       console.error("The error");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigation.navigate("Feed");
+    }
+  }, [user]);
 
   // redux
   const message = useSelector((state) => state.register);

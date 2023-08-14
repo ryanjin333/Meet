@@ -21,7 +21,6 @@ const Landing = ({ navigation }) => {
   useEffect(() => {
     if (user) {
       navigation.navigate("Feed");
-      console.log(user);
     }
   }, [user]);
 
@@ -73,6 +72,7 @@ const styles = EStyleSheet.create({
   titleContainer: {
     rowGap: 11,
     marginTop: 108,
+    marginBottom: 400,
     width: "100%",
   },
   title: {
