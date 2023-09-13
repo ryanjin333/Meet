@@ -47,7 +47,7 @@ const Landing = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Welcome</Text>
-          <Text style={styles.subtitle}>Plan meetups with friends! 😉</Text>
+          <Text style={styles.subtitle}>Plansss meetups with friends! 😉 lol</Text>
         </View>
         <BlurButton onPress={continueButtonTapped} title="Continue" />
       </SafeAreaView>
